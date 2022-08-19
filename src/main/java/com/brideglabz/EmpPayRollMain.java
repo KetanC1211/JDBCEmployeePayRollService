@@ -19,23 +19,7 @@ public class EmpPayRollMain {
 			System.out.println("5. Exit");
 			int c = Integer.parseInt(br.readLine());
 			if(c==1) {
-//				//add students
-//				System.out.println("Enter user name : ");
-//				String name = br.readLine();
-//				System.out.println("Enter user phone : ");
-//				String phone = br.readLine();
-//				System.out.println("Enter user city : ");
-//				String city = br.readLine();
-//				//Create obj to store student details
-//				EmployeeDetails st = new EmployeeDetails(name,gender,salary,date,startDate,phoneNumber,
-//						String address,department,basicPay,deductions,taxablePay,incomeTax,netPay);
-//				boolean answer = StudentDao.insertStudentToDB(st);
-//				System.out.println(st);
-//				if(answer) {
-//					System.out.println("Added record successfully");
-//				}else {
-//					System.out.println("Something went wrong try again...");
-//				}			
+				//insert elements			
 			}
 			else if(c==2) {
 				//delete students
@@ -58,6 +42,13 @@ public class EmpPayRollMain {
 			}
 			else if(c==4) {
 				//Search
+				//Search
+				boolean answer = Operation.updateSalaryFromGivenId();
+				if(answer) {
+					System.out.println("Updated Salary");
+				}else {
+					System.out.println("Something went wrong try again...");
+				}
 			}
 			else if(c==5) {
 				//Exit
