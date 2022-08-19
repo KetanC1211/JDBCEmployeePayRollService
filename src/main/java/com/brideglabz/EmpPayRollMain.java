@@ -21,6 +21,12 @@ public class EmpPayRollMain {
 			int c = Integer.parseInt(br.readLine());
 			if(c==1) {
 					// insert values
+				boolean answer = Operation.insertEmployeeToEmpPayRoll();
+				if(answer) {
+					System.out.println("Deleted record successfully");
+				}else {
+					System.out.println("Something went wrong try again...");
+				}
 			}
 			else if(c==2) {
 				//delete students
