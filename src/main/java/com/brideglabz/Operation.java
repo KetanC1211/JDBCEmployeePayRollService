@@ -1,15 +1,39 @@
 package com.brideglabz;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 public class Operation {
 	//Adding details to Employee Payroll Service
+	static ArrayList<Integer> salaryList = new ArrayList<Integer>();
+	public static boolean storeSalaryInArrayList() {
+		boolean f= false;
+		try {
+			Connection con = ConnectionProvider.createC();
+			String q = "select * from employee_payroll";
+			Statement stmt = con.createStatement();
+			ResultSet set = stmt.executeQuery(q);
+			while(set.next()) {
+				int salary = set.getInt(4);
+				salaryList.add(salary);	
+			}
+			f=true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		return f;
+	}
+	
 	public static boolean insertEmpToDB(EmployeeDetails emp) {
 		boolean f= false;
 		try {
@@ -54,7 +78,7 @@ public class Operation {
 			Connection con = ConnectionProvider.createC();
 			String q = "select * from employee_payroll";
 			Statement stmt = con.createStatement();
-			ResultSet set =stmt.executeQuery(q);
+			ResultSet set = stmt.executeQuery(q);
 			while(set.next()) {
 				int id = set.getInt(1);
 				String name = set.getString(2);
@@ -78,9 +102,12 @@ public class Operation {
 				System.out.println("Start Date : "+startDate);
 				System.out.println("Phone Number : "+phoneNumber);
 				System.out.println("Address : "+address);
-				System.out.println("Name : "+name);
-				System.out.println("Gender : "+gender);
-				System.out.println("Salary : "+salary);
+				System.out.println("Department : "+department);
+				System.out.println("Basic Pay : "+basicPay);
+				System.out.println("Deduction : "+deductions);
+				System.out.println("Taxable Pay : "+taxablePay);
+				System.out.println("Income Tax : "+incomeTax);
+				System.out.println("Net Pay : "+netPay);
 				System.out.println("+++++++++++++++++++");
 				
 			}
@@ -114,7 +141,6 @@ public class Operation {
 		}
 		return f;
 	}
-	
 	public static boolean displayDataInGivenRange() throws NumberFormatException, IOException {
 		boolean f= false;
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -150,17 +176,51 @@ public class Operation {
 				System.out.println("Start Date : "+startDate);
 				System.out.println("Phone Number : "+phoneNumber);
 				System.out.println("Address : "+address);
-				System.out.println("Name : "+name);
-				System.out.println("Gender : "+gender);
-				System.out.println("Salary : "+salary);
-				System.out.println("+++++++++++++++++++");
-				
+				System.out.println("Department : "+department);
+				System.out.println("Basic Pay : "+basicPay);
+				System.out.println("Deduction : "+deductions);
+				System.out.println("Taxable Pay : "+taxablePay);
+				System.out.println("Income Tax : "+incomeTax);
+				System.out.println("Net Pay : "+netPay);
+				System.out.println("+++++++++++++++++++");				
 			}
+
 			f=true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return f;
 	}
-	
+
+	public static boolean displayMaximumSalary() {
+		storeSalaryInArrayList();
+		int max = Collections.max(salaryList);
+        System.out.println("Maximum salary of employee is : " + max);
+		return true;
+	}
+	public static boolean displayMinimumSalary() {
+		storeSalaryInArrayList();
+		int min = Collections.min(salaryList);
+        System.out.println("Maximum salary of employee is : " + min);
+		return true;
+	}
+	public static boolean displayAverageOfSalary() {
+		storeSalaryInArrayList();
+		int total = 0;
+		for(int i = 0; i<salaryList.size(); i++) {
+		    total = total+ salaryList.get(i);
+		    }
+		double avg = total / salaryList.size();
+		System.out.println("The average salary of employee is:" + avg);
+		return true;
+	}
+	public static boolean displaySumOfSalary() {
+		storeSalaryInArrayList();
+		int total = 0;
+		for(int i = 0; i<salaryList.size(); i++) {
+		    total = total+ salaryList.get(i);
+		    }
+		System.out.println("The Sum of salary of all employee is:" + total);
+		return true;
+	}	
 }

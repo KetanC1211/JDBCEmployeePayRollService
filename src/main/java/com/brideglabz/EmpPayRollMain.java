@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.sql.SQLException;
 
 public class EmpPayRollMain {
 
@@ -19,7 +20,7 @@ public class EmpPayRollMain {
 			System.out.println("5. Exit");
 			int c = Integer.parseInt(br.readLine());
 			if(c==1) {
-				//insert elements			
+					// insert values
 			}
 			else if(c==2) {
 				//delete students
@@ -37,7 +38,11 @@ public class EmpPayRollMain {
 					System.out.println("\t ----Menu---- ");
 					System.out.println("1. Show table");
 					System.out.println("2. Display Data in given range");
-					System.out.println("3. Back");
+					System.out.println("3. Display Sum of Salary");
+					System.out.println("4. Display Average Salary");
+					System.out.println("5. Display Minimum Salary");
+					System.out.println("6. Display Maximum Salary");
+					System.out.println("7. Back");
 					int choice = Integer.parseInt(br.readLine());
 					if(choice==1) {
 						boolean answer = Operation.showAllEmployee();
@@ -55,7 +60,39 @@ public class EmpPayRollMain {
 							System.out.println("Something went wrong try again...");
 						}
 					}
-					else if(choice==3) {
+					else if(choice==3){
+						boolean answer = Operation.displaySumOfSalary();
+						if(answer) {
+							System.out.println("Successfully calculated sum");
+						}else {
+							System.out.println("Something went wrong try again...");
+						}
+					}
+					else if(choice==4){
+						boolean answer = Operation.displayAverageOfSalary();
+						if(answer) {
+							System.out.println("Successfully calculated average");
+						}else {
+							System.out.println("Something went wrong try again...");
+						}
+					}
+					else if(choice==5){
+						boolean answer = Operation.displayMinimumSalary();
+						if(answer) {
+							System.out.println("Successfully found minimum");
+						}else {
+							System.out.println("Something went wrong try again...");
+						}
+					}
+					else if(choice==6){
+						boolean answer = Operation.displayMaximumSalary();
+						if(answer) {
+							System.out.println("Successfully found maximum");
+						}else {
+							System.out.println("Something went wrong try again...");
+						}
+					}
+					else if(choice==7) {
 						break;
 					}
 					else {
@@ -63,8 +100,7 @@ public class EmpPayRollMain {
 					}
 				}
 			}
-			else if(c==4) {
-				//Search
+			else if(c==4) {	
 				boolean answer = Operation.updateSalaryFromGivenId();
 				if(answer) {
 					System.out.println("Updated Salary");
