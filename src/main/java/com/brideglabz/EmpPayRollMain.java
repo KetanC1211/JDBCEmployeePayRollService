@@ -33,15 +33,37 @@ public class EmpPayRollMain {
 				}
 			}
 			else if(c==3) {
-				boolean answer = Operation.showAllEmployee();
-				if(answer) {
-					System.out.println("All record shown");
-				}else {
-					System.out.println("Something went wrong try again...");
+				while(true) {
+					System.out.println("\t ----Menu---- ");
+					System.out.println("1. Show table");
+					System.out.println("2. Display Data in given range");
+					System.out.println("3. Back");
+					int choice = Integer.parseInt(br.readLine());
+					if(choice==1) {
+						boolean answer = Operation.showAllEmployee();
+						if(answer) {
+							System.out.println("All record shown");
+						}else {
+							System.out.println("Something went wrong try again...");
+						}
+					}
+					else if(choice==2){
+						boolean answer = Operation.displayDataInGivenRange();
+						if(answer) {
+							System.out.println("Record Shown");
+						}else {
+							System.out.println("Something went wrong try again...");
+						}
+					}
+					else if(choice==3) {
+						break;
+					}
+					else {
+						System.out.println("Invalid input");
+					}
 				}
 			}
 			else if(c==4) {
-				//Search
 				//Search
 				boolean answer = Operation.updateSalaryFromGivenId();
 				if(answer) {
